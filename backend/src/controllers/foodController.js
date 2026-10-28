@@ -59,4 +59,21 @@ const getFoodById = async (req, res, next) => {
   }
 };
 
+const getTopRatedFoods=async(req,res,next)=>{
+  try{
+    const limit= Math.min(parseInt(req.query.limit , 10) || 5,20);
+    const foods= await Food.findAll({
+      where:{isAvailable : true},
+      order:[['rating','DESC']],
+      limit,
+      include:[{model:Category , as:'category',attributes:['id','name']}],
+
+    });
+    res.json({success:true , data:foods});
+
+  }catch(error){
+    next(error)
+  }
+}
+
 module.exports = { getFoods, getFoodById };

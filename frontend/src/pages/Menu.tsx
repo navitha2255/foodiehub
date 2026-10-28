@@ -28,6 +28,7 @@ function Menu() {
       search: search || undefined,
       category: category || undefined,
       sort: sort || undefined,
+      limit: 50,
     })
       .then((result) => setFoods(result.foods))
       .catch(() => setError('Could not load food. Is the backend running?'))
