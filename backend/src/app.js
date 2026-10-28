@@ -1,8 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 
+const authRoutes = require('./routes/authRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const foodRoutes = require('./routes/foodRoutes');
+const addressRoutes = require('./routes/addressRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
@@ -21,8 +25,12 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/foods', foodRoutes);
+app.use('/api/addresses', addressRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/cart', cartRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
